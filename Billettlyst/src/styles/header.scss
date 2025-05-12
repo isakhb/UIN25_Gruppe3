@@ -1,0 +1,12 @@
+:root {
+    --truenavy: #3f5277;
+}
+
+header {
+    background-color: var(--truenavy);
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
