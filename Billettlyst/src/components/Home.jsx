@@ -6,27 +6,33 @@ export default function Home() {
 
   useEffect(() => {
     fetch(
-      `https://app.ticketmaster.com/discovery/v2/events.json?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&countryCode=NO&keyword=festival&size=4`
+      "https://app.ticketmaster.com/discovery/v2/events.json?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&countryCode=NO&size=100"
     )
       .then((res) => res.json())
       .then((data) => {
         if (data._embedded) {
-          const allEvents = data._embedded.events;
-          console.log("Alle event-navn:", allEvents.map(e => e.name));
-          setEvents(allEvents);
+          const filtered = data._embedded.events.filter((event) =>
+            [
+              "findings festival",
+              "neon",
+              "tons of rock"
+            ].some((name) =>
+              event.name.toLowerCase().includes(name)
+            )
+          );
+          setEvents(filtered);
         } else {
-          console.log("Ingen _embedded i API-responsen:", data);
+          setEvents([]);
         }
       })
-      .catch(err => console.error("API-feil:", err));
+      .catch(() => {
+        setEvents([]);
+      });
   }, []);
-  
-  
-  
 
   return (
     <div>
-      <h2>Sommerens festivaler!</h2>
+      <h2>Utvalgte arrangementer i Norge</h2>
       <div className="festival-grid">
         {events.map((event) => (
           <div className="festival-card" key={event.id}>
@@ -41,6 +47,7 @@ export default function Home() {
             </Link>
           </div>
         ))}
+        {events.length === 0 && <p>Ingen arrangementer funnet.</p>}
       </div>
     </div>
   );
