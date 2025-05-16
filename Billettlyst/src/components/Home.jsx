@@ -6,21 +6,31 @@ export default function Home() {
 
   useEffect(() => {
     fetch(
-      "https://app.ticketmaster.com/discovery/v2/events.json?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&countryCode=NO&size=100"
+      "https://app.ticketmaster.com/discovery/v2/events.json?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&attractionId=K8vZ917_YJf,K8vZ917K7fV,K8vZ917bJC7,K8vZ917oWOV&locale=*&countryCode=NO&size=100"
     )
       .then((res) => res.json())
       .then((data) => {
         if (data._embedded) {
-          const filtered = data._embedded.events.filter((event) =>
-            [
-              "findings festival",
-              "neon",
-              "tons of rock"
-            ].some((name) =>
-              event.name.toLowerCase().includes(name)
-            )
-          );
-          setEvents(filtered);
+          const allEvents = data._embedded.events;
+  
+          const festivaler = [
+            "findings festival",
+            "neon",
+            "skeikampenfestivalen",
+            "tons of rock"
+          ];
+  
+          const selectedEvents = [];
+          festivaler.forEach((festivalName) => {
+            const match = allEvents.find((event) =>
+              event.name.toLowerCase().includes(festivalName)
+            );
+            if (match) {
+              selectedEvents.push(match);
+            }
+          });
+  
+          setEvents(selectedEvents);
         } else {
           setEvents([]);
         }
@@ -29,6 +39,7 @@ export default function Home() {
         setEvents([]);
       });
   }, []);
+  
 
   return (
     <div>
