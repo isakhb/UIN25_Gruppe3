@@ -14,7 +14,7 @@ export default function EventPage() {
       .then((res) => res.json())
       .then((data) => {
         setAttractionName(data.name);
-        const genres = data.classifications?.map((c) => c.genre?.name).filter(Boolean);
+        const genres = data.classifications?.flatMap((c) => [c.genre?.name, c.subGenre?.name]).filter(Boolean);
         setGenre(genres || []);
       });
 
@@ -28,6 +28,7 @@ export default function EventPage() {
         }
       });
   }, [id]);
+  console.log(genre);
 
   return (
     <main>
@@ -35,7 +36,7 @@ export default function EventPage() {
 
       <section>
         <strong>Sjangrer:</strong>
-        <p>{genre.length > 0 ? genre.join(" · ") : "Test"}</p>
+        <p>{genre.length > 0 ? genre.join(", ") : "Test"}</p>
       </section>
 
       <section>
