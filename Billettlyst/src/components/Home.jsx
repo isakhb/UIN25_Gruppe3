@@ -1,5 +1,13 @@
+/*
+I denne koden henter vi festivaldata fra ticketmaster sitt api når siden lastes inn.
+Vi bruker useEffect til å hente dataen en gang og lagrer arrangementene i en state med useState
+Vi filtrerer 4 eventer ut  basert på navn i event listen.
+For å vise riktig navn på festivalene, bruker vi navnet fra attraction objektet i stedet for event.name.
+Hver festival vises med bilde, navn og en lenke som fører videre til eventet.
+*/
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; 
+
 
 export default function Home() {
   const [events, setEvents] = useState([]);
