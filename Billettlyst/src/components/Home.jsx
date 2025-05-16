@@ -42,25 +42,28 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <main>
       <h2>Utvalgte arrangementer i Norge</h2>
-      <div className="festival-grid">
+      <section className="festival-grid">
         {events.map((event) => (
-          <div className="festival-card" key={event.id}>
+          <article className="festival-card" key={event.id}>
             <img
               src={event.images[0].url}
               alt={event.name}
               className="festival-img"
             />
-            <h3>{event.name}</h3>
-            <Link to={`/event/${event._embedded.attractions[0].id}`} className="festival-btn">
-              Les mer om {event.name}
+            <h3>{event._embedded.attractions[0].name}</h3>
+            <Link
+              to={`/event/${event._embedded.attractions[0].id}`}
+              className="festival-btn"
+            >
+              Les mer om {event._embedded.attractions[0].name}
             </Link>
-          </div>
+          </article>
         ))}
         {events.length === 0 && <p>Ingen arrangementer funnet.</p>}
-      </div>
-    </div>
-  );
+      </section>
+    </main>
+  );  
 }
 
