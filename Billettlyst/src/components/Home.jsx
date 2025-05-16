@@ -12,25 +12,26 @@ export default function Home() {
       .then((data) => {
         if (data._embedded) {
           const allEvents = data._embedded.events;
-  
-          const festivaler = [
-            "findings festival",
+
+          const festivalNavn = [
             "neon",
-            "skeikampenfestivalen",
+            "findings festival",
+            "skeikampen",
             "tons of rock"
           ];
-  
-          const selectedEvents = [];
-          festivaler.forEach((festivalName) => {
+
+          const valgt = [];
+
+          festivalNavn.forEach((navn) => {
             const match = allEvents.find((event) =>
-              event.name.toLowerCase().includes(festivalName)
+              event.name.toLowerCase().includes(navn)
             );
             if (match) {
-              selectedEvents.push(match);
+              valgt.push(match);
             }
           });
-  
-          setEvents(selectedEvents);
+
+          setEvents(valgt);
         } else {
           setEvents([]);
         }
@@ -39,7 +40,6 @@ export default function Home() {
         setEvents([]);
       });
   }, []);
-  
 
   return (
     <div>
@@ -53,7 +53,7 @@ export default function Home() {
               className="festival-img"
             />
             <h3>{event.name}</h3>
-            <Link to={`/event/${event.id}`} className="festival-btn">
+            <Link to={`/event/${event._embedded.attractions[0].id}`} className="festival-btn">
               Les mer om {event.name}
             </Link>
           </div>
@@ -63,3 +63,4 @@ export default function Home() {
     </div>
   );
 }
+
