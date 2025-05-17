@@ -10,7 +10,7 @@ export default function Header() {
         <nav className="nav">
           <Link to="/category/musikk">Musikk</Link>
           <Link to="/category/sport">Sport</Link>
-          <Link to="/category/teater&show">Teater/Show</Link>
+          <Link to="/category/teatershow">Teater/Show</Link>
         </nav>
 
         <Link to="/dashboard" className="login-link">Logg inn</Link>

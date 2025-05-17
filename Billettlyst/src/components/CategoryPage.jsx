@@ -2,7 +2,10 @@ import { useParams } from "react-router-dom"
 
 export default function CategoryPage() {
     const { slug } = useParams()
-    const categoryOverskrift = slug.charAt(0).toUpperCase() + slug.slice(1) 
+    let categoryOverskrift = slug.charAt(0).toUpperCase() + slug.slice(1)
+    if (categoryOverskrift === "Teatershow") {
+        categoryOverskrift = "Teater/Show"
+    }
     return (
         <h2>{categoryOverskrift}</h2>
     )

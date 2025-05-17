@@ -35,12 +35,12 @@ export default function EventPage() {
       <h1>{attractionName}</h1>
 
       <section>
-        <strong>Sjangrer:</strong>
+        <h2>Sjangrer:</h2>
         <p>{genre.length > 0 ? genre.join(", ") : "Test"}</p>
       </section>
 
       <section>
-        <strong>Festivalpass:</strong>
+        <h2>Festivalpass:</h2>
 
         {eventData.length === 0 && <p>Ikke tilgjengelig.</p>}
 
@@ -53,7 +53,7 @@ export default function EventPage() {
                 className="festivalbilde"
               />
 
-              <h3>{event.name}</h3>
+              <h2>{event.name}</h2>
 
               <p>
                 Artister:{" "}
@@ -61,10 +61,11 @@ export default function EventPage() {
                   "Ukjent"}
               </p>
 
-              <p>Dato: {event.dates.start.localDate}</p>
+              <h2>Dato:</h2>
+              <p>{event.dates.start.localDate}</p>
 
+              <h2>Sted:{" "}</h2>
               <p>
-                Sted:{" "}
                 {event._embedded?.venues?.[0]?.city?.name},{" "}
                 {event._embedded?.venues?.[0]?.country?.name}
               </p>
