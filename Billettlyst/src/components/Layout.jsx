@@ -18,6 +18,7 @@ export default function Layout({ children }) {
       </header>
       {children}
       <footer>
+        data fra Ticketmaster API
       </footer>
     </>
   );
