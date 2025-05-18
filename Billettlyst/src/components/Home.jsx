@@ -1,18 +1,23 @@
 /*
-I denne koden henter vi festivaldata fra ticketmaster sitt api når siden lastes inn.
-Vi bruker useEffect til å hente dataen en gang og lagrer arrangementene i en state med useState
-Vi filtrerer 4 eventer ut  basert på navn i event listen.
-For å vise riktig navn på festivalene, bruker vi navnet fra attraction objektet i stedet for event.name.
-Hver festival vises med bilde, navn og en lenke som fører videre til eventet.
+I denne koden viser vi fire utvalgte festivaler i Norge. Vi bruker usestate for å 
+lage en variabel som heter events. Den holder på festivalene vi vil vise.
+Vi lager en funksjon som heter fetchevents. Den henter arrangementer fra ticketmaster sin api. 
+Når vi får dataen sjekker vi om den inneholder arrangementer. Så lager vi en liste med 
+navnene på de fire festivalene vi vil ha.
+Koden går gjennom alle arrangementene og sjekker om navnet inneholder ett av festivalnavnene. 
+Hvis det gjør det legger koden det til i en ny liste. Den listen lagrer i events.
+
+Vi bruker useeffect til å kjøre fetchevents en gang når siden lastes. Dette gjør at koden
+henter dataen automatisk når brukeren åpner siden.
+Til slutt vises innholdet fra events i nettsiden hvor hver festival vises med et bilde, navnet på 
+festivalen og en knapp.
 */
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; 
-
-
+import { Link } from "react-router-dom";
 export default function Home() {
   const [events, setEvents] = useState([]);
 
-  useEffect(() => {
+  const fetchEvents = async () => {
     fetch(
       "https://app.ticketmaster.com/discovery/v2/events.json?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&attractionId=K8vZ917_YJf,K8vZ917K7fV,K8vZ917bJC7,K8vZ917oWOV&locale=*&countryCode=NO&size=100"
     )
@@ -20,17 +25,14 @@ export default function Home() {
       .then((data) => {
         if (data._embedded) {
           const allEvents = data._embedded.events;
-
-          const festivalNavn = [
+          const festivalnavn = [
             "neon",
             "findings festival",
             "skeikampen",
             "tons of rock"
           ];
-
           const valgt = [];
-
-          festivalNavn.forEach((navn) => {
+          festivalnavn.forEach((navn) => {
             const match = allEvents.find((event) =>
               event.name.toLowerCase().includes(navn)
             );
@@ -38,15 +40,15 @@ export default function Home() {
               valgt.push(match);
             }
           });
-
           setEvents(valgt);
         } else {
           setEvents([]);
         }
       })
-      .catch(() => {
-        setEvents([]);
-      });
+  };
+
+  useEffect(() => {
+    fetchEvents();
   }, []);
 
   return (
@@ -69,9 +71,8 @@ export default function Home() {
             </Link>
           </article>
         ))}
-        {events.length === 0 && <p>Ingen arrangementer funnet.</p>}
       </section>
     </main>
-  );  
+  );
 }
 
