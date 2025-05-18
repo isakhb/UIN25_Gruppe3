@@ -87,6 +87,21 @@ h2 {
   cursor: pointer;
 }
 
+.byfilter {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.eventinfo {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
 @media (max-width: 768px) {
   .headerinne {
     flex-direction: column;
@@ -106,21 +121,6 @@ h2 {
   h2 {
     font-size: 1.5rem;
   }
-}
-
-.byfilter {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
-}
-
-.eventinfo {
-  list-style: none;
-  padding: 0;
-  margin: 0.5rem 0 0 0;
-  font-size: 0.95rem;
-  line-height: 1.5;
 }
 
    
