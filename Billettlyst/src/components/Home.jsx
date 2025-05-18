@@ -16,8 +16,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  const [events, setEvents] = useState([]);
-  const [cityEvents, setCityEvents] = useState([]);
+  const [events, setevents] = useState([]);
+  const [cityEvents, setcityevents] = useState([]);
   const [selectedcity, setselectedcity] = useState("Oslo");
 
   const fetchEvents = async () => {
@@ -40,23 +40,31 @@ export default function Home() {
             }
           });
 
-          setEvents(valgt);
+          setevents(valgt);
         } else {
-          setEvents([]);
+          setevents([]);
         }
       });
   };
 
-  const fetchCityEvents = async (city) => {
+/*
+Under overskriften hva skjer i storbyene har vi lagt til en meny med fem knapper. Når brukeren trykker på en knapp 
+oppdateres selectedcity med riktig bynavn via onclick={() => setselectedcity(city)}. 
+Vi bruker en useEffect med selectedcity som dependency for å trigge et nytt api kall hver gang byen endres.
+I fetchcityevents henter vi arrangementer fra ticketmaster ved å bruke city=${city} i url-en. Resultatet lagres i 
+cityevents ved hjelp av setcityevents. For å begrense visningen til 10 arrangementer bruker vi .slice(0, 10) rett før .map().
+*/
+
+  const fetchcityevents = async (city) => {
     fetch(
       `https://app.ticketmaster.com/discovery/v2/events.json?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&size=100&locale=*&city=${city}`
     )
       .then((res) => res.json())
       .then((data) => {
         if (data._embedded) {
-          setCityEvents(data._embedded.events);
+          setcityevents(data._embedded.events);
         } else {
-          setCityEvents([]);
+          setcityevents([]);
         }
       });
   };
@@ -66,7 +74,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    fetchCityEvents(selectedcity);
+    fetchcityevents(selectedcity);
   }, [selectedcity]);
 
   return (
