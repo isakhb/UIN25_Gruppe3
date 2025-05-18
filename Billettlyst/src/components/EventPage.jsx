@@ -1,43 +1,50 @@
-/*
-Denne koden viser navnet på festivalen som brukeren har trykket på. Vi henter id-en til festivalen 
-fra nettadressen ved hjelp av useparams. useparams henter verdier fra url-en. 
-I denne koden bruker vi den til å hente id-en til festivalen som brukeren har trykket på, 
-slik at vi kan hente riktig data fra api-et.
-Vi lager en state som heter attraksjonsnavn, som skal lagre navnet på festivalen.
-Vi lager en funksjon som heter getEventData. Den henter informasjon om festivalen fra ticketmaster sin api
-basert på id-en. 
-Vi bruker useeffect for å kjøre getEventData en gang når komponenten åpner, eller hvis id-en i 
-adressen endrer seg.
-Til slutt viser vi navnet på festivalen som en overskrift på siden.
-*/
-
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import PassCard from "./PassCard";
 
 export default function EventPage() {
   const { id } = useParams();
-  const [attraksjonsnavn, setattraksjonsnavn] = useState("");
+  const [event, setEvent] = useState();
+  const [pass, setPass] = useState([]);
 
-  const getEventData = async () => {
-    fetch(
-      `https://app.ticketmaster.com/discovery/v2/attractions/${id}.json?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setattraksjonsnavn(data.name);
-      })
-      .catch((error) => {
-        console.error("Feil under henting av attraction:", error);
-      });
+  const getEvent = async () => {
+    fetch(`https://app.ticketmaster.com/discovery/v2/attractions/${id}.json?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&locale=*`)
+      .then((response) => response.json())
+      .then((data) => setEvent(data))
+      .catch((error) => console.error("Feil ved henting av event:", error));
+  };
+
+  const getPass = async () => {
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&attractionId=${id}&locale=*`)
+      .then((response) => response.json())
+      .then((data) => setPass(data))
+      .catch((error) => console.error("Feil ved henting av billetter:", error));
   };
 
   useEffect(() => {
-    getEventData();
+    getEvent();
+    getPass();
   }, [id]);
 
   return (
     <main>
-      <h1>{attraksjonsnavn}</h1>
+      <h1>{event?.name}</h1>
+
+      <h3>
+        Sjanger:{" "}
+        {event?.classifications?.[0]?.segment?.name || "?"},{" "}
+        {event?.classifications?.[0]?.genre?.name || "?"},{" "}
+        {event?.classifications?.[0]?.subGenre?.name || "?"},{" "}
+        {event?.classifications?.[0]?.subType?.name || "?"}
+      </h3>
+
+      <h3 style={{ marginTop: "2rem" }}>Følg oss på sosiale medier:</h3>
+
+      <section className="festivalgrid">
+        {pass?._embedded?.events?.map((festivalPass) => (
+          <PassCard festivalPass={festivalPass} key={festivalPass.id} />
+        ))}
+      </section>
     </main>
   );
 }
