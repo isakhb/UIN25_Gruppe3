@@ -6,7 +6,10 @@ export default function CategoryPage() {
     if (categoryOverskrift === "Teatershow") {
         categoryOverskrift = "Teater/Show"
     }
+
     return (
-        <h2>{categoryOverskrift}</h2>
+        <main>
+            <h2>{categoryOverskrift}</h2>
+        </main>
     )
 }
