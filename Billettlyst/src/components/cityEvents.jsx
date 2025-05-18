@@ -1,4 +1,4 @@
-  import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CityCard from "./cityCard";
   
   export default function CityEvents() {
@@ -17,7 +17,7 @@ import CityCard from "./cityCard";
 
      return (
     <div>
-     <h2>Hva skjer i storbyene</h2>
+     <h2 className="hvaskjer">Hva skjer i storbyene</h2>
       <section className="byfilter">
         {["Oslo", "Stockholm", "Berlin", "London", "Paris"].map((city) => (
           <button
