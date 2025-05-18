@@ -6,32 +6,34 @@ export default function Home() {
   const [cityEvents, setcityevents] = useState([]);
   const [selectedcity, setselectedcity] = useState("Oslo");
 
-  const fetchEvents = async () => {
-    fetch(
-      "https://app.ticketmaster.com/discovery/v2/events.json?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&attractionId=K8vZ917_YJf,K8vZ917K7fV,K8vZ917bJC7,K8vZ917oWOV&locale=*&countryCode=NO&size=100"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data._embedded) {
-          const allEvents = data._embedded.events;
-          const festivalnavn = ["neon", "findings festival", "skeikampen", "tons of rock"];
-          const valgt = [];
+const fetchEvents = async () => {
+  fetch(
+    "https://app.ticketmaster.com/discovery/v2/events.json?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&attractionId=K8vZ917_YJf,K8vZ917K7fV,K8vZ917bJC7,K8vZ917oWOV&locale=*&countryCode=NO&size=100"
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      if (data._embedded) {
+        const allEvents = data._embedded.events;
 
-          festivalnavn.forEach((navn) => {
-            const match = allEvents.find((event) =>
-              event.name.toLowerCase().includes(navn)
-            );
-            if (match) {
-              valgt.push(match);
-            }
-          });
+        const festivalnavn = ["findings", "neon", "skeikampen", "tons of rock"];
+        const valgt = [];
 
-          setevents(valgt);
-        } else {
-          setevents([]);
-        }
-      });
-  };
+        festivalnavn.forEach((navn) => {
+          const match = allEvents.find((event) =>
+            event.name.toLowerCase().includes(navn)
+          );
+          if (match) {
+            valgt.push(match);
+          }
+        });
+
+        setevents(valgt);
+      } else {
+        setevents([]);
+      }
+    });
+};
+
 
   const fetchcityevents = async (city) => {
     fetch(
