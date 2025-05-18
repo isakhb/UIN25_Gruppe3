@@ -14,8 +14,11 @@ festivalen og en knapp.
 */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 export default function Home() {
   const [events, setEvents] = useState([]);
+  const [cityEvents, setCityEvents] = useState([]);
+  const [selectedcity, setselectedcity] = useState("Oslo");
 
   const fetchEvents = async () => {
     fetch(
@@ -25,13 +28,9 @@ export default function Home() {
       .then((data) => {
         if (data._embedded) {
           const allEvents = data._embedded.events;
-          const festivalnavn = [
-            "neon",
-            "findings festival",
-            "skeikampen",
-            "tons of rock"
-          ];
+          const festivalnavn = ["neon", "findings festival", "skeikampen", "tons of rock"];
           const valgt = [];
+
           festivalnavn.forEach((navn) => {
             const match = allEvents.find((event) =>
               event.name.toLowerCase().includes(navn)
@@ -40,16 +39,35 @@ export default function Home() {
               valgt.push(match);
             }
           });
+
           setEvents(valgt);
         } else {
           setEvents([]);
         }
-      })
+      });
+  };
+
+  const fetchCityEvents = async (city) => {
+    fetch(
+      `https://app.ticketmaster.com/discovery/v2/events.json?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&size=100&locale=*&city=${city}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data._embedded) {
+          setCityEvents(data._embedded.events);
+        } else {
+          setCityEvents([]);
+        }
+      });
   };
 
   useEffect(() => {
     fetchEvents();
   }, []);
+
+  useEffect(() => {
+    fetchCityEvents(selectedcity);
+  }, [selectedcity]);
 
   return (
     <main>
@@ -69,6 +87,40 @@ export default function Home() {
             >
               Les mer om {event._embedded.attractions[0].name}
             </Link>
+          </article>
+        ))}
+      </section>
+
+      <h2 style={{ marginTop: "4rem" }}>Hva skjer i storbyene</h2>
+      <section className="byfilter">
+        {["Oslo", "Stockholm", "Berlin", "London", "Paris"].map((city) => (
+          <button
+            key={city}
+            onClick={() => setselectedcity(city)}
+            className="festivalknapp"
+          >
+            {city}
+          </button>
+        ))}
+      </section>
+
+      <h3>Hva skjer i {selectedcity}</h3>
+      <section className="festivalgrid">
+        {cityEvents.slice(0, 10).map((event) => (
+          <article className="festivalkort" key={event.id}>
+            <img
+              src={event.images[0].url}
+              alt={event.name}
+              className="festivalbilde"
+            />
+            <h3>{event.name}</h3>
+            <ul className="eventinfo">
+              <li>Dato: {event.dates.start.localDate}</li>
+              <li>Tid: {event.dates.start.localTime || "Ikke oppgitt"}</li>
+              <li>Land: {event._embedded?.venues?.[0]?.country?.name}</li>
+              <li>By: {event._embedded?.venues?.[0]?.city?.name}</li>
+              <li>Scene: {event._embedded?.venues?.[0]?.name}</li>
+            </ul>
           </article>
         ))}
       </section>
