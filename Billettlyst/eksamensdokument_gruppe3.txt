@@ -1,0 +1,28 @@
+Gruppe 3
+
+Vanskelighetsgrad: C
+
+Github
+Aliaser
+isakhb = Isak Hansen Barabad
+Nils2312 = Nils Kristian Bjøro
+OskarElwart = Oskar Dominik Elwart
+Repository lenke
+https://github.com/isakhb/UIN25_Gruppe3 
+
+Redegjørelser
+Vi møtte på noen utfordringer med GitHub og samarbeid. Merging av endringer førte noen ganger til problemer, 
+der arbeid ble overskrevet eller forsvant. I noen tilfeller fungerte ikke mergingen slik vi ønsket.
+
+Kilder
+Undervisningsmateriale: Zelda_api-mappen på GitHub. Brukt som inspirasjon og referanse for hvordan man henter 
+data fra API-er 
+https://github.com/toremake/uin2025_coursebase/tree/main/Zelda_api
+
+Webtricks (u.å.). Kapitlene Asynkronitet og API-behandling og Asynkron databehandling i React 
+ble brukt som støtte under prosjektet
+https://lms.webtricks.blog/kurs/uin 
+
+Det ble ikke brukt noen form for AI til å skrive koden i dette prosjektet. Alt arbeid er gjort med utgangspunkt i 
+den kunnskapen vi har lært i undervisningen, samt med støtte fra undervisningsmateriellet på GitHub og Webtricks LMS. 
+Vi har fulgt strukturen som ble gjennomgått i timene og i Zelda_api-repositoriet.
