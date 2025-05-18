@@ -19,7 +19,7 @@ Undervisningsmateriale: Zelda_api-mappen på GitHub. Brukt som inspirasjon og re
 data fra API-er 
 https://github.com/toremake/uin2025_coursebase/tree/main/Zelda_api
 
-Webtricks (u.å.). Kapitlene Asynkronitet og API-behandling og Asynkron databehandling i React 
+Webtricks. Kapitlene Asynkronitet og API-behandling og Asynkron databehandling i React 
 ble brukt som støtte under prosjektet
 https://lms.webtricks.blog/kurs/uin 
 
