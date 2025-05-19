@@ -1,16 +1,30 @@
+/*
+Kilde:
+https://react.dev/learn/sharing-state-between-components#reacting-to-input-with-state
+*/
+
+import { useState } from "react";
+
 export default function Dashboard() {
-    return (
-      <main className="dashboard">
-        <h1>Dashboard</h1>
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  function handleLogin() {
+    setIsLoggedIn(true);
+  }
+  return (
+    <main className="dashboard">
+      {isLoggedIn ? (
+        <h2>Min side</h2>
+      ) : (
         <form className="loginform">
           <h3>Logg inn</h3>
-  
           <label htmlFor="username">Brukernavn:</label>
           <input id="username" type="text" placeholder="brukernavn" />
-  
-          <input type="submit" value="Logg inn" />
+          <button type="button" className="loginknapp" onClick={handleLogin}>
+            Logg inn
+          </button>
         </form>
-      </main>
-    );
-  }
-  
+      )}
+    </main>
+  );
+}

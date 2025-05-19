@@ -13,7 +13,7 @@ function App() {
     fetch("https://app.ticketmaster.com/discovery/v2/attractions?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&id=K8vZ917_YJf,K8vZ917K7fV,K8vZ917bJC7,K8vZ917oWOV&locale=*") 
       .then((response) => response.json()) 
       .then((data) => setFestivals(data._embedded.attractions)) 
-      .catch((error) => console.error("Skjedde noe dritt ved fetch", error)); 
+      .catch((error) => console.error("Skjedde noe feil ved fetch", error)); 
   };
 
   useEffect(() => {
