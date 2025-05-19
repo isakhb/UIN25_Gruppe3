@@ -13,6 +13,17 @@ REDEGJØRELSER
 Vi møtte på noen utfordringer med GitHub. Merging av endringer førte noen ganger til problemer, 
 der arbeid ble overskrevet eller forsvant. I noen tilfeller fungerte ikke mergingen slik vi ønsket.
 
+Vi slet med å vise riktig sjanger på EventPage. Det fungerte bare da vi trykket på Neon Festival, 
+men for de andre festivalene fikk vi undefined.
+
+Vi prøvde å løse dette på egenhånd uten å spørre AI om hjelp, men vi fant ikke en løsning på egenhånd. 
+Det virker som problemet ligger i at ikke alle attractions har like strukturert classifications data 
+eller at vi har skrevet noe feil i måten vi henter det på. Vi hentet sjanger med:
+event?.classifications[0].segment.name
+
+Til slutt valgte vi å gi oss og heller fokusere på resten av kravene i stedet. Vi håper det likevel teller positivt 
+at det fungerer for en festival og at vi har forstått hvorfor det ikke fungerer for de andre.
+
 Vi tolket oppgaveteksten at innlogging kun skulle håndteres med useState, uten noe krav til lokal lagring eller 
 backend. Derfor forsvinner innloggingsstatusen ved oppdatering, noe vi mener er innenfor rammene for C-nivået.
 
