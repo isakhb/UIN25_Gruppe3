@@ -156,6 +156,21 @@ h2 {
   line-height: 1.3;
 }
 
+.loginknapp {
+  background-color: black;
+  color: white;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.loginknapp:hover {
+  background-color: #333;
+  transform: scale(1.03);
+}
 
 
 @media (max-width: 768px) {
