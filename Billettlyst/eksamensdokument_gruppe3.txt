@@ -1,8 +1,7 @@
-Gruppe 3
-
+GRUPPE 3
 Vanskelighetsgrad: C
 
-Github
+GITHUB
 Aliaser
 isakhb = Isak Hansen Barabad
 Nils2312 = Nils Kristian Bjøro
@@ -10,19 +9,28 @@ OskarElwart = Oskar Dominik Elwart
 Repository lenke
 https://github.com/isakhb/UIN25_Gruppe3 
 
-Redegjørelser
-Vi møtte på noen utfordringer med GitHub og samarbeid. Merging av endringer førte noen ganger til problemer, 
+REDEGJØRELSER
+Vi møtte på noen utfordringer med GitHub. Merging av endringer førte noen ganger til problemer, 
 der arbeid ble overskrevet eller forsvant. I noen tilfeller fungerte ikke mergingen slik vi ønsket.
 
-Kilder
-Undervisningsmateriale: Zelda_api-mappen på GitHub. Brukt som inspirasjon og referanse for hvordan man henter 
-data fra API-er 
+Vi tolket oppgaveteksten at innlogging kun skulle håndteres med useState, uten noe krav til lokal lagring eller 
+backend. Derfor forsvinner innloggingsstatusen ved oppdatering, noe vi mener er innenfor rammene for C-nivået.
+
+Vi rakk å fullføre alt som kreves for karakter C.
+
+KILDER
+Undervisningsmateriale: Zelda_api-mappen på GitHub. Brukt som inspirasjon til oppsett og referanse for hvordan man 
+henter data fra API-er 
 https://github.com/toremake/uin2025_coursebase/tree/main/Zelda_api
 
-Webtricks. Kapitlene Asynkronitet og API-behandling og Asynkron databehandling i React 
-ble brukt som støtte under prosjektet
+Webtricks. Kapitlene Asynkronitet og API-behandling og Asynkron databehandling i 
+React ble brukt som støtte under prosjektet
 https://lms.webtricks.blog/kurs/uin 
 
-Det ble ikke brukt noen form for AI til å skrive koden i dette prosjektet. Alt arbeid er gjort med utgangspunkt i 
-den kunnskapen vi har lært i undervisningen, samt med støtte fra undervisningsmateriellet på GitHub og Webtricks LMS. 
+React dokumentasjonen ble brukt som støtte for hvordan man håndterer innlogging med state og skjema i Dashboard, samt
+søkefunksjonen til CategoryPage siden
+https://react.dev/learn/sharing-state-between-components#reacting-to-input-with-state
+
+Det ble IKKE brukt noen form for AI til å skrive koden i dette prosjektet. Alt arbeid er gjort med utgangspunkt i den 
+kunnskapen vi har lært i undervisningen, samt med støtte fra undervisningsmateriellet på GitHub og Webtricks LMS. 
 Vi har fulgt strukturen som ble gjennomgått i timene og i Zelda_api-repositoriet.
