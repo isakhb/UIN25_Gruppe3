@@ -16,6 +16,12 @@ der arbeid ble overskrevet eller forsvant. I noen tilfeller fungerte ikke mergin
 Vi tolket oppgaveteksten at innlogging kun skulle håndteres med useState, uten noe krav til lokal lagring eller 
 backend. Derfor forsvinner innloggingsstatusen ved oppdatering, noe vi mener er innenfor rammene for C-nivået.
 
+Vi mener at nettsiden vår oppfyller kravene til universell utforming slik det står i oppgaveteksten. Vi har brukt 
+svarte knapper med hvit tekst og hover effekter. Innholdet er responsivt og fungerer både på mobil og pc.
+Vi har brukt semantiske HTML elementer og alle interaktive elementer kan nås og brukes med tastatur.
+Etter vår forståelse handler UU i denne sammenhengen om å sikre god kontrast, en tydelig struktur, muligheten for navigere
+med tastatur og et responsivt design. Dette har vi implementert i prosjektet vårt.
+
 Vi rakk å fullføre alt som kreves for karakter C.
 
 KILDER
