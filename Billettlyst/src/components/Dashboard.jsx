@@ -10,17 +10,19 @@ export default function Dashboard() {
 
   function handleLogin() {
     setIsLoggedIn(true);
-  }  
+  }
   return (
     <main className="dashboard">
       {isLoggedIn ? (
         <h2>Min side</h2>
       ) : (
-        <form className="loginform" onSubmit={handleLogin}>
+        <form className="loginform">
           <h3>Logg inn</h3>
           <label htmlFor="username">Brukernavn:</label>
           <input id="username" type="text" placeholder="brukernavn" />
-          <input type="submit" value="Logg inn" />
+          <button type="button" className="loginknapp" onClick={handleLogin}>
+            Logg inn
+          </button>
         </form>
       )}
     </main>
