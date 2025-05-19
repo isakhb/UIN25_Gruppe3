@@ -14,25 +14,36 @@ export default function CategoryPage() {
         categoryOverskrift = "Teater/Show"
     }
 
-  const getCategories = async () => {
-    fetch(`https://app.ticketmaster.com/discovery/v2/suggest?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&keyword=${slug}`)
-      .then((response) => response.json())
-      .then((data) => {setCategories(data);console.log(data);})
-      .catch((error) =>
-        console.error("Skjedde noe feil ved fetch av søk", error)
-      );
-  };
-
+    const getCategories = async () => {
+      fetch(`https://app.ticketmaster.com/discovery/v2/suggest?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&keyword=${slug}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setCategories(data._embedded?.attractions || []);
+          console.log(data._embedded?.attractions);
+        })
+        .catch((error) =>
+          console.error("Skjedde noe feil ved fetch av søk", error)
+        );
+    };
+    
     useEffect(() => {
      getCategories();
     console.log("Min state", categories);
     }, [slug]);
 
-      const handleClick = () => {
-    console.log("Search clicked with value:", search);
-  };
-
-      
+    const handleClick = () => {
+      if (search && search.trim() !== "") {
+        fetch(`https://app.ticketmaster.com/discovery/v2/suggest?apikey=2z18XWCPogP0EapmKXD2lRLzM10n6jL3&keyword=${search}`)
+          .then((response) => response.json())
+          .then((data) => {
+            setCategories(data._embedded?.attractions || []);
+            console.log("Søkeresultater:", data._embedded?.attractions);
+          })
+          .catch((error) =>
+            console.error("Funker ikke å søke agh", error)
+          );
+      }
+    };
 
     return (
         <main>
